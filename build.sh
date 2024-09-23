@@ -140,7 +140,6 @@ cmake -B llvm-build -S llvm-src/llvm \
   -DLLVM_TOOL_LLVM_DIS_BUILD=OFF \
   -DLLVM_TOOL_LLVM_DIS_FUZZER_BUILD=OFF \
   -DLLVM_TOOL_LLVM_DLANG_DEMANGLE_FUZZER_BUILD=OFF \
-  -DLLVM_TOOL_LLVM_DRIVER_BUILD=ON \
   -DLLVM_TOOL_LLVM_DWARFDUMP_BUILD=ON \
   -DLLVM_TOOL_LLVM_DWARFUTIL_BUILD=OFF \
   -DLLVM_TOOL_LLVM_DWP_BUILD=OFF \
@@ -221,7 +220,7 @@ cmake -B llvm-build -S llvm-src/llvm \
 # The "all" target still contains far too much stuff, even given all the options above, so build
 # only Clang/LLD, explicitly. For the same reason using the "install" target is infeasible.
 # I spent a while trying and it leads nowhere.
-cmake --build llvm-build --target llvm-driver
+cmake --build llvm-build --target clangd
 cmake --build llvm-build --target install-core-resource-headers
 
 # Install the driver (which is a multi-call binary) manually.
@@ -281,9 +280,3 @@ cmake -B libcxx-build -S llvm-src/runtimes \
   -DLIBCXXABI_LIBDIR_SUFFIX=/${WASI_TARGET} \
   -DCMAKE_INSTALL_PREFIX=wasi-prefix
 cmake --build libcxx-build --target install
-
-# Crimees. For testing only!
-cp driverdriver.py wasi-prefix/bin/
-for tool in $(__DRIVERDRIVER_LIST=1 ./driverdriver.py); do
-  ln -sf driverdriver.py wasi-prefix/bin/${tool}
-done
