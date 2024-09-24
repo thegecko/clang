@@ -103,7 +103,6 @@ cmake -B llvm-build -S llvm-src/llvm \
   -DLLVM_BUILD_STATIC=ON \
   -DLLVM_ENABLE_THREADS=OFF \
   -DLLVM_BUILD_RUNTIME=OFF \
-  -DLLVM_BUILD_TOOLS=OFF \
   -DLLVM_INCLUDE_UTILS=OFF \
   -DLLVM_BUILD_UTILS=OFF \
   -DLLVM_INCLUDE_RUNTIMES=OFF \
@@ -209,13 +208,11 @@ cmake -B llvm-build -S llvm-src/llvm \
   -DCLANG_ENABLE_ARCMT=OFF \
   -DCLANG_ENABLE_STATIC_ANALYZER=OFF \
   -DCLANG_INCLUDE_TESTS=OFF \
-  -DCLANG_BUILD_TOOLS=OFF \
   -DCLANG_TOOL_CLANG_SCAN_DEPS_BUILD=OFF \
   -DCLANG_TOOL_CLANG_INSTALLAPI_BUILD=OFF \
   -DCLANG_BUILD_EXAMPLES=OFF \
   -DCLANG_INCLUDE_DOCS=OFF \
   -DCLANG_LINKS_TO_CREATE="clang;clang++" \
-  -DLLD_BUILD_TOOLS=OFF \
   -DCMAKE_INSTALL_PREFIX=llvm-prefix
 # The "all" target still contains far too much stuff, even given all the options above, so build
 # only Clang/LLD, explicitly. For the same reason using the "install" target is infeasible.
